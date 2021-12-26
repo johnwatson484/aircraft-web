@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  hapi-template:
+  aircraft-web:
     build: .
-    image: hapi-template
-    container_name: hapi-template
+    image: aircraft-web
+    container_name: aircraft-web

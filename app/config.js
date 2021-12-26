@@ -1,18 +1,38 @@
-const joi = require('joi')
+const Joi = require('joi')
 const envs = ['development', 'test', 'production']
 
 // Define config schema
-const schema = joi.object().keys({
-  port: joi.number().default(3000),
-  env: joi.string().valid(...envs).default(envs[0]),
-  appName: joi.string()
+const schema = Joi.object().keys({
+  port: Joi.number().default(3000),
+  env: Joi.string().valid(...envs).default(envs[0]),
+  appName: Joi.string(),
+  cache: Joi.object({
+    socket: Joi.object({
+      host: Joi.string(),
+      port: Joi.number().default(6379),
+      tls: Joi.boolean().default(false)
+    }),
+    password: Joi.string().allow(''),
+    partition: Joi.string().default('aircraft-cache'),
+    ttl: Joi.number().default(3600 * 1000 * 24 * 30) // 30 days
+  })
 })
 
 // Build config
 const config = {
   port: process.env.PORT,
   env: process.env.NODE_ENV,
-  appName: 'Hapi Template'
+  appName: 'Aircraft Tracking',
+  cache: {
+    socket: {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+      tls: process.env.NODE_ENV === 'production'
+    },
+    password: process.env.REDIS_PASSWORD,
+    partition: process.env.REDIS_PARTITION,
+    ttl: process.env.REDIS_TTL
+  }
 }
 
 // Validate config

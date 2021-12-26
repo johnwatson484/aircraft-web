@@ -4,14 +4,26 @@ version: '3.8'
 # to provide dependencies and expose ports for local testing
 
 services:
-  hapi-template:
+  aircraft-web:
     build:
       target: development
-    image: hapi-template-development
-    container_name: hapi-template-development
+    image: aircraft-web-development
+    container_name: aircraft-web-development
     ports:
       - "3000:3000"
-      - "9229:9229"
+      - "9231:9229"
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json
+    environment:
+      REDIS_HOST: aircraft-redis
+
+  aircraft-redis:
+    image: redis:6
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6380:6379"
+
+volumes:
+  redis_data:
