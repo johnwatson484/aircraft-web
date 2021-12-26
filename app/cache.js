@@ -14,19 +14,19 @@ const stop = async () => {
   await client.disconnect()
 }
 
-const get = async (key) => {
-  const fullKey = getFullKey(key)
-  const value = await client.get(fullKey)
-  return value ? JSON.parse(value) : {}
-}
-
-const getFullKey = (key) => {
+const get = async () => {
   const prefix = getKeyPrefix()
-  return `${prefix}:${key}`
+  const keys = await client.keys(prefix)
+  const aircraft = []
+  for (const key of keys) {
+    const tracked = await client.get(key)
+    aircraft.push(JSON.parse(tracked))
+  }
+  return aircraft
 }
 
 const getKeyPrefix = () => {
-  return `${cache.partition}`
+  return `${cache.partition}:*`
 }
 
 module.exports = {

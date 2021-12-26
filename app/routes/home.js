@@ -1,7 +1,10 @@
+const { get } = require('../cache')
+
 module.exports = [{
   method: 'GET',
   path: '/',
-  handler: (request, h) => {
-    return h.view('home')
+  handler: async (request, h) => {
+    const aircraft = await get()
+    return h.view('home', { aircraft })
   }
 }]

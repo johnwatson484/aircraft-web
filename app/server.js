@@ -1,5 +1,6 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
+const cache = require('./cache')
 
 async function createServer () {
   // Create the hapi server
@@ -27,6 +28,8 @@ async function createServer () {
   if (config.isDev) {
     await server.register(require('blipp'))
   }
+
+  await cache.start()
 
   return server
 }

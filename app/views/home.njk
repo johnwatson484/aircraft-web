@@ -2,4 +2,12 @@
 
 {% block content %}
   <h1>{{ appName }}</h1>
+
+  <ul>
+    {% for tracked in aircraft %}
+      <li>{{ tracked }}</li>
+    {% else %}
+      <li>No tracked aircraft</li>
+    {% endfor %}
+  </ul>
 {% endblock %}
