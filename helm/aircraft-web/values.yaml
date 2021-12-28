@@ -9,8 +9,6 @@ container:
   limitMemory: 120Mi
   limitCpu: 120m
   port: 3000
-  readOnlyRootFilesystem: true
-  allowPrivilegeEscalation: false
   redisHost:
   redisPassword:
 
