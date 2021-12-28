@@ -8,24 +8,69 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="header-{{ tracked.icao24 }}">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ tracked.icao24 }}" aria-expanded="true" aria-controls="collapse-{{ tracked.icao24 }}">
-              {{ tracked.icao24 }}
+              {{ tracked.icao24 }} - {{tracked.callSign }}
             </button>
           </h2>
-          <div id="collapse-{{ tracked.icao24 }}" class="accordion-collapse collapse show" aria-labelledby="header-{{ tracked.icao24 }}" data-bs-parent="#accordion-tracked">
+          <div id="collapse-{{ tracked.icao24 }}" class="accordion-collapse collapse" aria-labelledby="header-{{ tracked.icao24 }}" data-bs-parent="#accordion-tracked">
             <div class="accordion-body">
               <div class="row">
-                <div class="col">ICAO24</div>
-                <div class="col">{{ tracked.icao24 }}</div>
-                <div class="col">Call sign</div>
-                <div class="col">{{ tracked.callSign }}</div>
+                <div class="col">
+                  <strong>ICAO24</strong>
+                  {{ tracked.icao24 }}
+                </div>
+                <div class="col">
+                  <strong>Call sign</strong>
+                  {{ tracked.callSign }}
+                </div>
+                <div class="col">
+                  <strong>Origin Country</strong>
+                  {{ tracked.originCountry }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <strong>Time position</strong>
+                  {{ tracked.timePosition }}
+                </div>
+                <div class="col">
+                  <strong>Last contact</strong>
+                  {{ tracked.lastContact }}
+                </div>
+                <div class="col"></div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <strong>Longitude</strong>
+                  {{ tracked.longitude }}
+                </div>
+                <div class="col">
+                  <strong>Latitude</strong>
+                  {{ tracked.latitude }}
+                </div>
+                <div class="col"></div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <strong>Barometric Altitude</strong>
+                  {{ tracked.barometricAltitude }}
+                </div>
+                <div class="col">
+                  <strong>Geometric Altitude</strong>
+                  {{ tracked.geoAltitude }}
+                </div>
+                <div class="col">
+                  <strong>Velocity</strong>
+                  {{ tracked.velocity }}
+                </div>
               </div>
             </div>
           </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="alert alert-warning" role="alert">
-        No tracked aircraft
-      </div>
-    {% endif %}
-  {% endblock %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+    No tracked aircraft
+  </div>
+  {% endif %}
+{% endblock %}
