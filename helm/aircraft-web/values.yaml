@@ -1,0 +1,27 @@
+environment: development
+name: aircraft-web
+image: aircraft-web
+
+container:
+  imagePullPolicy: Always
+  requestMemory: 120Mi
+  requestCpu: 120m
+  limitMemory: 120Mi
+  limitCpu: 120m
+  port: 3000
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  redisHost:
+  redisPassword:
+
+deployment:
+  restartPolicy: Always
+  replicas: 1
+
+ingress:
+  class: nginx
+  host:
+  certIssuer: letsencrypt
+
+service:
+  port: 80

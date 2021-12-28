@@ -1,0 +1,8 @@
+{{- include "helm-library.deployment" (list . "aircraft-web.deployment") -}}
+{{- define "aircraft-web.deployment" -}}
+spec:
+  template:
+    spec:
+      containers:
+      - {{ include "helm-library.container" (list . "aircraft-web.container") }}
+{{- end -}}

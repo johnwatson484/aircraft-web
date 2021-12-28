@@ -1,0 +1,8 @@
+{{- include "helm-library.ingress" (list . "lynx-magnus-web.ingress") -}}
+{{- define "lynx-magnus-web.ingress" -}}
+metadata:
+  annotations:
+  {{- if .Values.ingress.host }}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.certIssuer }}
+  {{- end }}
+{{- end -}}
