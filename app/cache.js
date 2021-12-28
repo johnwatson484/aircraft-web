@@ -20,7 +20,8 @@ const get = async () => {
   const aircraft = []
   for (const key of keys) {
     const tracked = await client.get(key)
-    aircraft.push(JSON.parse(tracked))
+    const parsed = JSON.parse(tracked)
+    aircraft.push(parsed)
   }
   return aircraft
 }
