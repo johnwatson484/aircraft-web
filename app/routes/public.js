@@ -4,6 +4,7 @@ module.exports = [{
   handler: {
     directory: {
       path: [
+        'app/public/css',
         'app/public/assets'
       ]
     }

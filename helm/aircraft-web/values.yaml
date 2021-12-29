@@ -15,6 +15,7 @@ container:
 deployment:
   restartPolicy: Always
   replicas: 1
+  minReadySeconds: 0
 
 ingress:
   class: nginx
@@ -23,3 +24,6 @@ ingress:
 
 service:
   port: 80
+
+secret:
+  type: Opaque

@@ -1,67 +1,119 @@
 {% extends '_layout.njk' %}
 
 {% block content %}
-  <h4>Tracked aircraft</h4>
+  <h3>Tracked aircraft</h3>
   {% if aircraft.length %}
     <div class="accordion" id="accordion-tracked">
       {% for tracked in aircraft %}
         <div class="accordion-item">
           <h2 class="accordion-header" id="header-{{ tracked.icao24 }}">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ tracked.icao24 }}" aria-expanded="true" aria-controls="collapse-{{ tracked.icao24 }}">
-              {{ tracked.icao24 }} - {{tracked.callSign }}
+              {{ tracked.icao24 }} - {{ tracked.callSign }}<br>{{ tracked.timestampFormatted }}
             </button>
           </h2>
-          <div id="collapse-{{ tracked.icao24 }}" class="accordion-collapse collapse" aria-labelledby="header-{{ tracked.icao24 }}" data-bs-parent="#accordion-tracked">
+          <div id="collapse-{{ tracked.icao24 }}" class="accordion-collapse collapse {% if loop.index == 1 %}show{% endif %}" aria-labelledby="header-{{ tracked.icao24 }}" data-bs-parent="#accordion-tracked">
             <div class="accordion-body">
               <div class="row">
                 <div class="col">
-                  <strong>ICAO24</strong>
-                  {{ tracked.icao24 }}
+                  <div class="col">
+                    <strong>ICAO24</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.icao24 }}
+                  </div>
                 </div>
                 <div class="col">
-                  <strong>Call sign</strong>
-                  {{ tracked.callSign }}
+                  <div class="col">
+                    <strong>Call sign</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.callSign }}
+                  </div>
                 </div>
                 <div class="col">
-                  <strong>Origin Country</strong>
-                  {{ tracked.originCountry }}
+                  <div class="col">
+                    <strong>Origin country</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.originCountry }}
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <strong>Time position</strong>
-                  {{ tracked.timePosition }}
+                  <div class="col">
+                    <strong>Time position</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.timePositionDateFormatted }}
+                  </div>
                 </div>
                 <div class="col">
-                  <strong>Last contact</strong>
-                  {{ tracked.lastContact }}
+                  <div class="col">
+                    <strong>Last contact</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.lastContactDateFormatted }}
+                  </div>
                 </div>
                 <div class="col"></div>
               </div>
               <div class="row">
                 <div class="col">
-                  <strong>Longitude</strong>
-                  {{ tracked.longitude }}
+                  <div class="col">
+                    <strong>Longitude</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.longitude }}
+                  </div>
                 </div>
                 <div class="col">
-                  <strong>Latitude</strong>
-                  {{ tracked.latitude }}
+                  <div class="col">
+                    <strong>Latitude</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.latitude }}
+                  </div>
                 </div>
                 <div class="col"></div>
               </div>
               <div class="row">
                 <div class="col">
-                  <strong>Barometric Altitude</strong>
-                  {{ tracked.barometricAltitude }}
+                  <div class="col">
+                    <strong>Barometric altitude (m)</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.barometricAltitude }}
+                  </div>
                 </div>
                 <div class="col">
-                  <strong>Geometric Altitude</strong>
-                  {{ tracked.geoAltitude }}
+                  <div class="col">
+                    <strong>Geometric altitude (m)</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.geoAltitude }}
+                  </div>
+                </div>
+                <div class="col"></div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="col">
+                    <strong>Velocity (mps)</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.velocity }}
+                  </div>
                 </div>
                 <div class="col">
-                  <strong>Velocity</strong>
-                  {{ tracked.velocity }}
+                  <div class="col">
+                    <strong>Vertical rate (mps)</strong>
+                  </div>
+                  <div class="col">
+                    {{ tracked.verticalRate }}
+                  </div>
                 </div>
+                <div class="col"></div>
               </div>
             </div>
           </div>

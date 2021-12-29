@@ -1,5 +1,7 @@
 const { cache } = require('./config')
 const { createClient } = require('redis')
+const sortArray = require('./sort-array')
+const moment = require('moment')
 let client
 
 const start = async () => {
@@ -23,11 +25,27 @@ const get = async () => {
     const parsed = JSON.parse(tracked)
     aircraft.push(parsed)
   }
-  return aircraft
+  return format(sort(aircraft))
 }
 
 const getKeyPrefix = () => {
   return `${cache.partition}:*`
+}
+
+const sort = (aircraft) => {
+  if (!aircraft.length) {
+    return aircraft
+  }
+  return aircraft.sort((a, b) => sortArray(b.timestamp, a.timestamp))
+}
+
+const format = (aircraft) => {
+  return aircraft.map(x => ({
+    ...x,
+    timestampFormatted: moment(x.timestamp).format('DD[/]MM[/]YYYY HH:mm:ss'),
+    timePositionDateFormatted: moment(x.timePositionDate).format('DD[/]MM[/]YYYY HH:mm:ss'),
+    lastContactDateFormatted: moment(x.lastContactDate).format('DD[/]MM[/]YYYY HH:mm:ss')
+  }))
 }
 
 module.exports = {
