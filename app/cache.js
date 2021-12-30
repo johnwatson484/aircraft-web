@@ -29,7 +29,7 @@ const get = async () => {
 }
 
 const getKeyPrefix = () => {
-  return `${cache.partition}:*`
+  return `${cache.partition}:aircraft*`
 }
 
 const sort = (aircraft) => {
