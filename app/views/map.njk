@@ -1,0 +1,22 @@
+{% extends '_layout.njk' %}
+
+{% block content %}
+  <h3>{{ icao24 }}</h3>
+  <div id="map" class="map"></div>
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.10.0/build/ol.js"></script>
+  <script>
+    const locations = {{ locations | dump | safe }}
+    const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat(locations.center),
+        zoom: 4
+      })
+    })
+  </script>
+{% endblock %}

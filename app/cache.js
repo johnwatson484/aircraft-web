@@ -1,11 +1,9 @@
-const { cache } = require('./config')
+const { cache: config } = require('./config')
 const { createClient } = require('redis')
-const sortArray = require('./sort-array')
-const moment = require('moment')
 let client
 
 const start = async () => {
-  client = createClient({ socket: cache.socket, password: cache.password })
+  client = createClient({ socket: config.socket, password: config.password })
   client.on('error', (err) => console.log(`Redis error: ${err}`))
   client.on('reconnecting', () => console.log('Redis reconnecting...'))
   client.on('ready', () => console.log('Redis connected'))
@@ -16,40 +14,29 @@ const stop = async () => {
   await client.disconnect()
 }
 
-const get = async () => {
-  const prefix = getKeyPrefix()
-  const keys = await client.keys(prefix)
-  const aircraft = []
-  for (const key of keys) {
-    const tracked = await client.get(key)
-    const parsed = JSON.parse(tracked)
-    aircraft.push(parsed)
-  }
-  return format(sort(aircraft))
+const keys = async (cache) => {
+  const prefix = getKeyPrefix(cache)
+  return client.keys(`${prefix}*`)
 }
 
-const getKeyPrefix = () => {
-  return `${cache.partition}:aircraft*`
+const get = async (cache, key) => {
+  const fullKey = key.includes(':') ? key : getFullKey(cache, key)
+  const value = await client.get(fullKey)
+  return value ? JSON.parse(value) : {}
 }
 
-const sort = (aircraft) => {
-  if (!aircraft.length) {
-    return aircraft
-  }
-  return aircraft.sort((a, b) => sortArray(b.timestamp, a.timestamp))
+const getFullKey = (cache, key) => {
+  const prefix = getKeyPrefix(cache)
+  return `${prefix}:${key}`
 }
 
-const format = (aircraft) => {
-  return aircraft.map(x => ({
-    ...x,
-    timestampFormatted: moment(x.timestamp).format('DD[/]MM[/]YYYY HH:mm:ss'),
-    timePositionDateFormatted: moment(x.timePositionDate).format('DD[/]MM[/]YYYY HH:mm:ss'),
-    lastContactDateFormatted: moment(x.lastContactDate).format('DD[/]MM[/]YYYY HH:mm:ss')
-  }))
+const getKeyPrefix = (cache) => {
+  return `${config.partition}:${cache}`
 }
 
 module.exports = {
   start,
   stop,
+  keys,
   get
 }
