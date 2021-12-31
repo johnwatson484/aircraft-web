@@ -1,4 +1,4 @@
-const { get } = require('../location')
+const { get } = require('../route')
 const Joi = require('joi')
 
 module.exports = [{
@@ -12,8 +12,8 @@ module.exports = [{
     },
     handler: async (request, h) => {
       const { icao24 } = request.query
-      const locations = await get(icao24)
-      return h.view('map', { icao24, locations })
+      const route = await get(icao24)
+      return h.view('map', { icao24, route })
     }
   }
 }]
