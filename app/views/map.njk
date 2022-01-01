@@ -1,7 +1,7 @@
 {% extends '_layout.njk' %}
 
 {% block content %}
-  <h3>{{ icao24 }}</h3>
+  <h3>Flight path for transponder {{ icao24 }}</h3>
   <div id="map" class="map"></div>
   <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.10.0/build/ol.js"></script>
   <script>
@@ -9,8 +9,8 @@
 
     const image = new ol.style.Circle({
       radius: 5,
-      fill: null,
-      stroke: new ol.style.Stroke({color: 'red', width: 1}),
+      fill: new ol.style.Fill({ color: 'red' }),
+      stroke: new ol.style.Stroke({ color: 'red', width: 1 }),
     })
 
     const styles = {
@@ -18,7 +18,7 @@
         image: image,
       }),
       'LineString': new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'red', width: 5})
+        stroke: new ol.style.Stroke({ color: 'red', width: 5 })
       })
     }
 
