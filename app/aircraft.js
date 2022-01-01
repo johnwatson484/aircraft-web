@@ -7,7 +7,7 @@ const getAll = async () => {
   const aircraft = []
   for (const key of keys) {
     const plane = await cache.get('aircraft', key)
-    const data = await cache.get('data', key)
+    const data = await cache.get('data', plane.icao24)
     aircraft.push({ ...plane, ...data })
   }
   return format(sort(aircraft))
