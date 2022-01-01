@@ -1,7 +1,8 @@
-const image = new ol.style.Circle({
-  radius: 5,
-  fill: new ol.style.Fill({ color: 'red' }),
-  stroke: new ol.style.Stroke({ color: 'red', width: 1 })
+const image = new ol.style.Icon({
+  anchor: [15, 5],
+  anchorXUnits: 'pixels',
+  anchorYUnits: 'pixels',
+  src: 'assets/aircraft.png'
 })
 
 const styles = {
