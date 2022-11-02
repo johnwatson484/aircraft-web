@@ -1,9 +1,8 @@
-environment: development
+environment: production
 name: aircraft-web
 image: aircraft-web
 
 container:
-  imagePullPolicy: Always
   requestMemory: 120Mi
   requestCpu: 120m
   limitMemory: 120Mi
@@ -12,18 +11,9 @@ container:
   redisHost:
   redisPassword:
 
-deployment:
-  restartPolicy: Always
-  replicas: 1
-  minReadySeconds: 0
+deployment: {}
 
-ingress:
-  class: nginx
-  host:
-  certIssuer: letsencrypt
-
-service:
-  port: 80
+ingress: {}
 
 secret:
   type: Opaque
