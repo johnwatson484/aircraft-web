@@ -9,7 +9,7 @@ const displayMap = (route) => { // eslint-disable-line no-unused-vars
 
   const styles = {
     Point: new ol.style.Style({
-      image: image
+      image
     }),
     LineString: new ol.style.Style({
       stroke: new ol.style.Stroke({ color: 'red', width: 5 })
@@ -35,7 +35,7 @@ const displayMap = (route) => { // eslint-disable-line no-unused-vars
     ],
     view: new ol.View({
       center: ol.proj.fromLonLat(route.center),
-      zoom: 11
+      zoom: 10.5
     })
   })
 }
