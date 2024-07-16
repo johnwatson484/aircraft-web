@@ -13,10 +13,10 @@ const get = async (icao24) => {
   return {
     center: [cacheData.location[0]?.source?.longitude ?? 0, cacheData.location[0]?.source?.latitude ?? 0],
     geoJson: turf.featureCollection([pathFeature, locationFeature]),
-    rotation
+    rotation,
   }
 }
 
 module.exports = {
-  get
+  get,
 }

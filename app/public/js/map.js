@@ -4,16 +4,16 @@ const displayMap = (route) => { // eslint-disable-line no-unused-vars
     anchorXUnits: 'pixels',
     anchorYUnits: 'pixels',
     src: 'assets/aircraft.png',
-    rotation: route.rotation
+    rotation: route.rotation,
   })
 
   const styles = {
     Point: new ol.style.Style({
-      image
+      image,
     }),
     LineString: new ol.style.Style({
-      stroke: new ol.style.Stroke({ color: 'red', width: 5 })
-    })
+      stroke: new ol.style.Stroke({ color: 'red', width: 5 }),
+    }),
   }
 
   const styleFunction = (feature) => {
@@ -31,11 +31,11 @@ const displayMap = (route) => { // eslint-disable-line no-unused-vars
     target: 'map',
     layers: [
       new ol.layer.Tile({ source: new ol.source.OSM() }),
-      layer
+      layer,
     ],
     view: new ol.View({
       center: ol.proj.fromLonLat(route.center),
-      zoom: 10.5
-    })
+      zoom: 10.5,
+    }),
   })
 }

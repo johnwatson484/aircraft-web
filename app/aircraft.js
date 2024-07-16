@@ -25,10 +25,10 @@ const format = (aircraft) => {
     ...x,
     timestampFormatted: moment(x.timestamp).format('DD[/]MM[/]YYYY HH:mm:ss'),
     timePositionDateFormatted: moment(x.timePositionDate).format('DD[/]MM[/]YYYY HH:mm:ss'),
-    lastContactDateFormatted: moment(x.lastContactDate).format('DD[/]MM[/]YYYY HH:mm:ss')
+    lastContactDateFormatted: moment(x.lastContactDate).format('DD[/]MM[/]YYYY HH:mm:ss'),
   }))
 }
 
 module.exports = {
-  getAll
+  getAll,
 }

@@ -38,5 +38,5 @@ module.exports = {
   start,
   stop,
   keys,
-  get
+  get,
 }

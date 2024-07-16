@@ -6,5 +6,5 @@ module.exports = [{
   handler: async (request, h) => {
     const aircraft = await getAll()
     return h.view('home', { aircraft })
-  }
+  },
 }]

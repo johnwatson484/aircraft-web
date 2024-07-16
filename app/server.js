@@ -9,13 +9,13 @@ async function createServer () {
     routes: {
       validate: {
         options: {
-          abortEarly: false
-        }
-      }
+          abortEarly: false,
+        },
+      },
     },
     router: {
-      stripTrailingSlash: true
-    }
+      stripTrailingSlash: true,
+    },
   })
 
   // Register the plugins

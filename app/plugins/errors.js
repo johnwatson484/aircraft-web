@@ -18,9 +18,9 @@ module.exports = {
 
           // Log the error
           request.log('error', {
-            statusCode: statusCode,
+            statusCode,
             message: response.message,
-            stack: response.data ? response.data.stack : response.stack
+            stack: response.data ? response.data.stack : response.stack,
           })
 
           // The return the `500` view
@@ -28,6 +28,6 @@ module.exports = {
         }
         return h.continue
       })
-    }
-  }
+    },
+  },
 }

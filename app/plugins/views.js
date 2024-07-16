@@ -17,19 +17,19 @@ module.exports = {
         prepare: (options, next) => {
           options.compileOptions.environment = nunjucks.configure(path.join(options.relativeTo || process.cwd(), options.path), {
             autoescape: true,
-            watch: false
+            watch: false,
           })
 
           return next()
-        }
-      }
+        },
+      },
     },
     path: '../views',
     relativeTo: __dirname,
     isCached: !config.isDev,
     context: {
       assetPath: '/assets',
-      appName: config.appName
-    }
-  }
+      appName: config.appName,
+    },
+  },
 }
