@@ -8,12 +8,12 @@ container:
   limitMemory: 120Mi
   limitCpu: 120m
   port: 3000
-  redisHost:
-  redisPassword:
+  redisHost: services.lynxmagnus.com
 
 deployment: {}
 
-ingress: {}
+ingress:
+  host: aircraft.lynxmagnus.com
 
 secret:
-  type: Opaque
+  secretsPath: /aircraft-web

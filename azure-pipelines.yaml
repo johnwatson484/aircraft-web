@@ -17,4 +17,3 @@ extends:
     name: aircraft-web
     deploy: true
     namespace: aircraft
-    hasSecureHelmValuesFile: true
