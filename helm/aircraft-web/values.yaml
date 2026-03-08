@@ -1,8 +1,8 @@
 environment: production
 name: aircraft-web
-image: aircraft-web
 
 container:
+  image: aircraft-web
   requestMemory: 120Mi
   requestCpu: 120m
   limitMemory: 120Mi
