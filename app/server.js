@@ -1,6 +1,7 @@
 const hapi = require('@hapi/hapi')
 const config = require('./config')
 const cache = require('./cache')
+const track = require('./track')
 
 async function createServer () {
   // Create the hapi server
@@ -30,6 +31,7 @@ async function createServer () {
   }
 
   await cache.start()
+  track.start()
 
   return server
 }

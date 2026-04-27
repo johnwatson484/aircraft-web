@@ -1,3 +1,0 @@
-{{- include "helm-library.ingress" (list . "lynx-magnus-web.ingress") -}}
-{{- define "lynx-magnus-web.ingress" -}}
-{{- end -}}

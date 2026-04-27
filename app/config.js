@@ -14,8 +14,20 @@ const schema = Joi.object().keys({
     }),
     password: Joi.string().allow(''),
     partition: Joi.string().default('aircraft-cache'),
-    ttl: Joi.number().default(3600 * 1000 * 24 * 30), // 30 days
+    ttl: Joi.number().default(172800), // 2 days in seconds
   }),
+  api: Joi.object({
+    protocol: Joi.string().default('https'),
+    host: Joi.string().default('opensky-network.org/api'),
+    username: Joi.string(),
+    password: Joi.string(),
+  }),
+  geo: Joi.object({
+    longitude: Joi.number().required(),
+    latitude: Joi.number().required(),
+    distance: Joi.number().default(15),
+  }),
+  frequency: Joi.number().default(90000), // 90 seconds
 })
 
 // Build config
@@ -33,6 +45,18 @@ const config = {
     partition: process.env.REDIS_PARTITION,
     ttl: process.env.REDIS_TTL,
   },
+  api: {
+    protocol: process.env.API_PROTOCOL,
+    host: process.env.API_HOST,
+    username: process.env.API_USERNAME,
+    password: process.env.API_PASSWORD,
+  },
+  geo: {
+    longitude: process.env.GEO_LONGITUDE,
+    latitude: process.env.GEO_LATITUDE,
+    distance: process.env.GEO_DISTANCE,
+  },
+  frequency: process.env.FREQUENCY,
 }
 
 // Validate config

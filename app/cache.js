@@ -1,5 +1,6 @@
 const { cache: config } = require('./config')
 const { createClient } = require('redis')
+const hoek = require('@hapi/hoek')
 let client
 
 const start = async () => {
@@ -25,6 +26,18 @@ const get = async (cache, key) => {
   return value ? JSON.parse(value) : {}
 }
 
+const set = async (cache, key, value) => {
+  const fullKey = getFullKey(cache, key)
+  const serializedValue = JSON.stringify(value)
+  await client.set(fullKey, serializedValue, { EX: config.ttl })
+}
+
+const update = async (cache, key, cacheData) => {
+  const existing = await get(cache, key)
+  hoek.merge(existing, cacheData, { mergeArrays: true })
+  await set(cache, key, existing)
+}
+
 const getFullKey = (cache, key) => {
   const prefix = getKeyPrefix(cache)
   return `${prefix}:${key}`
@@ -39,4 +52,6 @@ module.exports = {
   stop,
   keys,
   get,
+  set,
+  update,
 }
